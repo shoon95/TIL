@@ -1,0 +1,31 @@
+# 유효성 검사 Type 에러
+
+## 에러
+
+~~~
+2024-03-10T09:40:54.430+09:00 ERROR 26173 --- [nio-8080-exec-4] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: jakarta.validation.UnexpectedTypeException: HV000030: No validator could be found for constraint 'jakarta.validation.constraints.NotBlank' validating type 'java.lang.Long'. Check configuration for 'id'] with root cause
+
+~~~
+
+* id 에 대해 유효성 검사를 할 때 타입 에러 발생
+
+
+
+## 해결
+
+ID는 보통 long 타입이므로 NotBlank가 아닌 NotNull로 검사를 수행해야함
+
+### NotBlank
+
+* 문자열이 Null이 아니고 공백이 아닌 하나 이상의 문자가 들어있는지 확인
+
+* 문자열에 대한 유효성을 검사하는 annotation
+
+
+
+### NotNull
+
+* 필드 또는 매개변수가 Null이 아닌지 확인
+* NotBlank와 달리 공백 여부는 중요하지 않고 단순 Null만 확인
+* 숫자에 대해 유효성을 검사할 때 사용 가능
+
